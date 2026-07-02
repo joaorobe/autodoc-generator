@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoDoc - Gerador de Documentação</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f8f9fa; color: #212529; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #dee2e6; }
+        h1 { color: #0d6efd; margin-top: 0; }
+        p { color: #6c757d; }
+        textarea { width: 100%; height: 150px; padding: 15px; margin-top: 10px; border-radius: 6px; border: 1px solid #ced4da; background-color: #212529; color: #f8f9fa; font-family: 'Courier New', Courier, monospace; box-sizing: border-box; resize: vertical; }
+        textarea:focus { outline: none; border-color: #0d6efd; box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25); }
+        button { background-color: #0d6efd; color: white; border: none; padding: 12px 20px; cursor: pointer; border-radius: 6px; margin-top: 15px; font-weight: 600; font-size: 15px; transition: background-color 0.2s; }
+        button:hover { background-color: #0b5ed7; }
+        .resposta-box { background-color: #f8f9fa; padding: 20px; margin-top: 25px; border-radius: 6px; border: 1px solid #ced4da; border-left: 5px solid #198754; font-family: 'Courier New', Courier, monospace; white-space: pre-wrap; min-height: 100px; }
+        .loading { font-style: italic; color: #0dcaf0; font-family: sans-serif; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>📝 AutoDoc</h1>
+    <p>Cole uma função ou trecho de código abaixo. O sistema irá gerar a documentação técnica completa contendo: Descrição, Parâmetros, Retorno e Exemplo de Uso.</p>
+    
+    <textarea id="promptInput" placeholder="Exemplo:
+function calcularDesconto(preco, percentual) {
+  if(percentual < 0 || percentual > 100) return null;
+  return preco - (preco * (percentual / 100));
+}"></textarea>
+    <br>
+    <button onclick="enviarCodigo()">Gerar Documentação</button>
+
+    <div id="respostaSaida" class="resposta-box">A documentação gerada aparecerá aqui...</div>
+</div>
+
+<script>
+    async function enviarCodigo() {
+        const prompt = document.getElementById("promptInput").value;
+        const saida = document.getElementById("respostaSaida");
+
+        if (!prompt.trim()) {
+            alert("Por favor, insira algum código para documentar.");
+            return;
+        }
+
+        saida.innerHTML = "<span class='loading'>Analisando código e gerando documentação...</span>";
+
+        try {
+            const resposta = await fetch("/api/llm", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ prompt })
+            });
+
+            const dados = await resposta.json();
+
+            if (resposta.ok) {
+                saida.textContent = dados.resposta;
+            } else {
+                saida.textContent = "Erro: " + (dados.erro || "Falha na comunicação com a API.");
+            }
+        } catch (erro) {
+            saida.textContent = "Erro de conexão: " + erro.message;
+        }
+    }
+</script>
+
+</body>
+</html>
