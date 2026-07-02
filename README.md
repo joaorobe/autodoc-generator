@@ -54,8 +54,9 @@ Siga os passos abaixo para rodar o AutoDoc:
    **CMD do Windows/PowerShell**
    curl -X POST http://localhost:3000/api/llm -H "Content-Type: application/json" -d "{\"prompt\":\"function soma(a, b) { return a + b; }\"}"
 
-**Código de exemplo**
+## Código de exemplo
 
+```javascript
 function calcularValorFinal(valorTotal, cupomDesconto) {
     if (valorTotal <= 0) {
         return 0;
@@ -70,4 +71,5 @@ function calcularValorFinal(valorTotal, cupomDesconto) {
 
     const valorComDesconto = valorTotal - (valorTotal * desconto);
     return valorComDesconto;
-} 
+}
+``` 
