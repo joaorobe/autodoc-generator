@@ -56,18 +56,17 @@ Siga os passos abaixo para rodar o AutoDoc:
 
 **Código de exemplo**
 
+
 function calcularValorFinal(valorTotal, cupomDesconto) {
     if (valorTotal <= 0) {
         return 0;
     }
-
     let desconto = 0;
     if (cupomDesconto === "ALUNOADS10") {
         desconto = 0.10; // 10% de desconto
     } else if (cupomDesconto === "BOLSISTA20") {
         desconto = 0.20; // 20% de desconto
     }
-
     const valorComDesconto = valorTotal - (valorTotal * desconto);
     return valorComDesconto;
 } 
