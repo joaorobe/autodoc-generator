@@ -7,27 +7,57 @@ O AutoDoc é uma ferramenta voltada para desenvolvedores com o objetivo de gerar
 * **Processamento:** O back-end recebe o código e o envia para a API do OpenRouter. O prompt de sistema (`role: "system"`) instrui a IA a agir como um Engenheiro de Software especialista em documentação técnica, com temperatura ajustada para `0.3` para garantir precisão. A IA é obrigada a processar o código e extrair as especificações exatas exigidas.
 * **Saída:** O sistema exibe a documentação formatada obrigatoriamente com 4 tópicos: Descrição da funcionalidade, Parâmetros (nome e tipo), Retorno esperado e um Exemplo de Uso prático.
 
-## Como instalar e executar
+## Como Instalar
 
-Siga os passos abaixo para rodar o AutoDoc:
+Clone o repositório:
 
-1. **Instale as dependências:**
-   Execute no terminal: `npm install`
-2. **Configure a Chave da API:**
-   Crie um arquivo `.env` na raiz do projeto contendo a sua chave do OpenRouter: `OPENROUTER_API_KEY=sua_chave_aqui`
-3. **Inicie o Servidor:**
-   Execute no terminal: `npm start`
-4. **Acesse a Aplicação:**
-   Abra o navegador em `http://localhost:3000`
+```
+git clone https://github.com/joaorobe/autodoc-generator.git
+```
 
-## Como pegar a chave do OpenRouter para colocar no .env
+Entre na pasta do projeto:
+
+```
+cd autodoc-generator
+```
+
+Instale as dependências:
+
+```
+npm install
+```
+
+## Configuração da API
+
+Crie um arquivo `.env` na raiz do projeto:
+
+```
+OPENROUTER_API_KEY=sua_chave_aqui
+```
+
+### Como pegar a chave do OpenRouter
 
 1. Acesse o site do OpenRouter e faça login na sua conta.
 2. Entre na área de chaves de API ou nas configurações de conta.
 3. Crie uma nova chave de API, se ainda não tiver uma.
 4. Copie o valor da chave.
-5. Crie um arquivo chamado `.env` na raiz do projeto.
-6. Cole a chave no formato: `OPENROUTER_API_KEY="sua_chave_aqui"`
+5. Cole a chave no arquivo `.env` no formato: `OPENROUTER_API_KEY=sua_chave_aqui`
+
+**Importante:** Nunca coloque a chave direto no código JavaScript e não compartilhe o arquivo `.env`.
+
+## Como Executar
+
+Inicie o servidor:
+
+```
+npm start
+```
+
+Abra no navegador:
+
+```
+http://localhost:3000
+```
 
 
 ## Como usar o AutoDoc
